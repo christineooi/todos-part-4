@@ -10,7 +10,7 @@ class TodoItem extends React.Component {
         <div className="view">
           <input className="toggle" type="checkbox" onChange={this.props.onToggle(this.props.todoId)} checked={this.props.isCompleted}/>
           <label>{this.props.text}</label>
-          <button className="destroy" ></button> 
+          <button className="destroy" onClick={this.props.onClick(this.props.todoId)}></button> 
         </div>
       </li>
     );
@@ -24,7 +24,8 @@ class TodoList extends React.Component {
       <section className="main">
         <ul className="todo-list">
           {this.props.todos.map( todo => <TodoItem key={todo.id} todoId={todo.id} text={todo.title} isCompleted={todo.completed} 
-                                          onToggle={this.props.onToggle} 
+                                          onToggle={this.props.onToggle}
+                                          onClick={this.props.onClick} 
                                          /> )}
         </ul>
       </section>
@@ -63,13 +64,11 @@ class App extends Component {
               }),
               text: ''
             });
-            console.log("todos: ", this.state.todos);
         }
   }
 
   toggleCompleted = id => evt => {
     const { todos } = this.state;
-    console.log("In App - todo ID:", id)
     this.setState({
       // If the todo we are iterating over has an id that matches the id we baked into the
       // event handler...
@@ -83,9 +82,25 @@ class App extends Component {
     });
   }
 
+  removeTodo = idToRemove => evt => {
+    const { todos } = this.state;
+    this.setState({
+      todos: todos.filter((todo) => {
+              return todo.id !== idToRemove;
+            })
+    });
+  }
+
+  clearCompleted = evt => {
+    const { todos } = this.state;
+    this.setState({
+      todos: todos.filter((todo) => {
+        return !todo.completed;
+      })
+    });
+  }
+
   render() {
-    // const { todos } = this.state;
-    //onToggle={(e) => this.toggleTodo(this.state.todos.id, e)}
     return (
       <section className="todoapp">
         <header className="header">
@@ -98,10 +113,10 @@ class App extends Component {
             placeholder="What needs to be done?" autoFocus 
           />
         </header>
-        <TodoList todos={this.state.todos} onToggle={this.toggleCompleted} />
+        <TodoList todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} />
         <footer className="footer">
           <span className="todo-count"><strong>0</strong> item(s) left</span>
-          <button className="clear-completed">Clear completed</button>
+          <button className="clear-completed" onClick={this.clearCompleted}>Clear completed</button>
         </footer>
 		</section>
     );
