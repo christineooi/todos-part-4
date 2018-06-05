@@ -101,6 +101,15 @@ class App extends Component {
   }
 
   render() {
+    let todos=this.state.todos;
+    let countTodosLeft = 0;
+    // Count how many items are not completed
+    for(let i=0;i<todos.length;i++){
+      if (!todos[i].completed){
+        countTodosLeft++;
+      }
+    }
+
     return (
       <section className="todoapp">
         <header className="header">
@@ -115,7 +124,7 @@ class App extends Component {
         </header>
         <TodoList todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} />
         <footer className="footer">
-          <span className="todo-count"><strong>0</strong> item(s) left</span>
+          <span className="todo-count"><strong>{countTodosLeft}</strong> item(s) left</span>
           <button className="clear-completed" onClick={this.clearCompleted}>Clear completed</button>
         </footer>
 		</section>
