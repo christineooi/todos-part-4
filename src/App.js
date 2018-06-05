@@ -6,7 +6,7 @@ class TodoItem extends React.Component {
 
   render() {
     return (
-      <li>
+      <li className={this.props.isCompleted ? "completed": null}>
         <div className="view">
           <input className="toggle" type="checkbox" onChange={this.props.onToggle(this.props.todoId)} checked={this.props.isCompleted}/>
           <label>{this.props.text}</label>
@@ -53,8 +53,8 @@ class App extends Component {
 
         var value=this.state.text.trim();
         if(value){
-            const userId = this.state.todos[this.state.todos.length-1].userId;
-            const id = this.state.todos[this.state.todos.length-1].id;
+            const userId = this.state.todos.length ? this.state.todos[this.state.todos.length-1].userId : 1;
+            const id = this.state.todos.length ? this.state.todos[this.state.todos.length-1].id : 1;
             this.setState({
               todos: this.state.todos.concat({
                 userId:userId,
