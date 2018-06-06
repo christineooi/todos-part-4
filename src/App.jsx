@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link, Route, Switch } from "react-router-dom";
+import { Redirect } from 'react-router';
 import './App.css';
 import todoList from './todos.json';
 import TodoList from './TodoList';
-
 
 class App extends Component {
 
@@ -102,6 +102,7 @@ class App extends Component {
           <Route exact path="/" render={(props) => <TodoList {...props} todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} filterTab="all"/>} />
           <Route path="/active" render={(props) => <TodoList {...props} todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} filterTab="active"/>} />
           <Route path="/completed" render={(props) => <TodoList {...props} todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} filterTab="completed"/>} />
+          <Redirect to="/" />
         </Switch>
         <footer className="footer">
           <span className="todo-count"><strong>{countTodosLeft}</strong> item(s) left</span>
