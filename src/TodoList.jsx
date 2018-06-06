@@ -5,6 +5,7 @@ class TodoList extends Component {
 
     render() {
       const filterTab = this.props.filterTab;
+      console.log("filterTab: ", filterTab);
       return (
         <section className="main">
           <ul className="todo-list">

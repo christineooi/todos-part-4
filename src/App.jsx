@@ -99,25 +99,25 @@ class App extends Component {
           />
         </header>
         <Switch>
-            <Route exact path="/" render={(props) => <TodoList {...props} todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} filterTab="all"/>} />
-            <Route path="/active" render={(props) => <TodoList {...props} todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} filterTab="active"/>} />
-            <Route path="/completed" render={(props) => <TodoList {...props} todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} filterTab="completed"/>} />
+            <Route exact path="./" render={(props) => <TodoList {...props} todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} filterTab="all"/>} />
+            <Route path="./active" render={(props) => <TodoList {...props} todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} filterTab="active"/>} />
+            <Route path="./completed" render={(props) => <TodoList {...props} todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} filterTab="completed"/>} />
           </Switch>
         <footer className="footer">
           <span className="todo-count"><strong>{countTodosLeft}</strong> item(s) left</span>
           <ul className="filters">
             <li>
-              <Link to="/">
+              <Link to="./">
                 All
               </Link>
             </li>
             <li>
-              <Link to="/active">
+              <Link to="./active">
                 Active
               </Link>
             </li>
             <li>
-              <Link to="/completed">
+              <Link to="./completed">
                 Completed
               </Link>
             </li>
