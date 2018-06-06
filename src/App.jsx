@@ -1,37 +1,9 @@
 import React, { Component } from 'react';
+import { Link, Route, Switch } from "react-router-dom";
 import './App.css';
 import todoList from './todos.json';
+import TodoList from './TodoList';
 
-class TodoItem extends React.Component {
-
-  render() {
-    return (
-      <li className={this.props.isCompleted ? "completed": null}>
-        <div className="view">
-          <input className="toggle" type="checkbox" onChange={this.props.onToggle(this.props.todoId)} checked={this.props.isCompleted}/>
-          <label>{this.props.text}</label>
-          <button className="destroy" onClick={this.props.onClick(this.props.todoId)}></button> 
-        </div>
-      </li>
-    );
-  }
-}
-
-class TodoList extends React.Component {
-
-  render() {
-    return (
-      <section className="main">
-        <ul className="todo-list">
-          {this.props.todos.map( todo => <TodoItem key={todo.id} todoId={todo.id} text={todo.title} isCompleted={todo.completed} 
-                                          onToggle={this.props.onToggle}
-                                          onClick={this.props.onClick} 
-                                         /> )}
-        </ul>
-      </section>
-    );
-  }
-}
 
 class App extends Component {
 
@@ -125,6 +97,29 @@ class App extends Component {
         <TodoList todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} />
         <footer className="footer">
           <span className="todo-count"><strong>{countTodosLeft}</strong> item(s) left</span>
+          <ul className="filters">
+            <li>
+              <Link to="#/">
+                All
+              </Link>
+            </li>
+            <li>
+              <Link to="#/active">
+                Active
+              </Link>
+            </li>
+            <li>
+              <Link to="#/completed">
+                Completed
+              </Link>
+            </li>
+          </ul>
+          <Switch>
+            <Route exact path="#/" render={(props) => <TodoList {...props} filterTab="all"/>} />
+            <Route path="#/active" render={(props) => <TodoList {...props} filterTab="active"/>} />
+            <Route path="#/completed" render={(props) => <TodoList {...props} filterTab="completed"/>} />
+            {/* <Redirect to="#/" /> */}
+          </Switch>
           <button className="clear-completed" onClick={this.clearCompleted}>Clear completed</button>
         </footer>
 		</section>
