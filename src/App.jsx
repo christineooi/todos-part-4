@@ -18,6 +18,7 @@ class App extends Component {
     });
   }
 
+  // Entering a new todo item
   handleOnKeyDown = (event) => {
     if(event.keyCode !== 13)  // Enter Key
       return;
@@ -39,6 +40,7 @@ class App extends Component {
         }
   }
 
+  // When a particular todo item is checked (marked as complete)
   toggleCompleted = id => evt => {
     const { todos } = this.state;
     this.setState({
@@ -54,6 +56,7 @@ class App extends Component {
     });
   }
 
+  // When the X is clicked on a particular todo item
   removeTodo = idToRemove => evt => {
     const { todos } = this.state;
     this.setState({
@@ -63,6 +66,7 @@ class App extends Component {
     });
   }
 
+  // When the Clear Completed button is clicked
   clearCompleted = evt => {
     const { todos } = this.state;
     this.setState({
@@ -94,32 +98,31 @@ class App extends Component {
             placeholder="What needs to be done?" autoFocus 
           />
         </header>
-        <TodoList todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} />
+        <Switch>
+            <Route exact path="/" render={(props) => <TodoList {...props} todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} filterTab="all"/>} />
+            <Route path="/active" render={(props) => <TodoList {...props} todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} filterTab="active"/>} />
+            <Route path="/completed" render={(props) => <TodoList {...props} todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} filterTab="completed"/>} />
+          </Switch>
         <footer className="footer">
           <span className="todo-count"><strong>{countTodosLeft}</strong> item(s) left</span>
           <ul className="filters">
             <li>
-              <Link to="#/">
+              <Link to="/">
                 All
               </Link>
             </li>
             <li>
-              <Link to="#/active">
+              <Link to="/active">
                 Active
               </Link>
             </li>
             <li>
-              <Link to="#/completed">
+              <Link to="/completed">
                 Completed
               </Link>
             </li>
           </ul>
-          <Switch>
-            <Route exact path="#/" render={(props) => <TodoList {...props} filterTab="all"/>} />
-            <Route path="#/active" render={(props) => <TodoList {...props} filterTab="active"/>} />
-            <Route path="#/completed" render={(props) => <TodoList {...props} filterTab="completed"/>} />
-            {/* <Redirect to="#/" /> */}
-          </Switch>
+          
           <button className="clear-completed" onClick={this.clearCompleted}>Clear completed</button>
         </footer>
 		</section>
