@@ -6,10 +6,12 @@
     "gh-pages": "^1.2.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "redux": "^4.0.0"
   },
-  "homepage": "https://christineooi.github.io/todos-part-3/",
+  "homepage": "https://christineooi.github.io/todos-part-4/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
