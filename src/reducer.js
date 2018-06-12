@@ -8,7 +8,7 @@ const reducer = (state = todoList, action) => {
           ...state,
           {
             userId: action.userId,
-            id: state[state.length-1].id + 1,
+            id: state.length > 0 ? state[state.length-1].id + 1 : 1,
             title: action.title,
             completed: action.completed
           }

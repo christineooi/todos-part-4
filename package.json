@@ -9,8 +9,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
-    "redux": "^4.0.0",
-    "redux-devtools-extension": "^2.13.2"
+    "redux": "^4.0.0"
   },
   "homepage": "https://christineooi.github.io/todos-part-4/",
   "scripts": {

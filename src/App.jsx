@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Link, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router';
+import { Redirect, withRouter} from 'react-router';
 import './App.css';
 import TodoList from './TodoList';
-import {addTodo, clearCompletedTodos} from './actions';
+import {addTodo} from './actions';
 
 class App extends Component {
 
@@ -61,26 +61,10 @@ class App extends Component {
   //   });
   // }
 
-  // When the Clear Completed button is clicked
-  clearCompleted = evt => {
-    this.props.dispatch(clearCompletedTodos());
-    // const { todos } = this.state;
-    // this.setState({
-    //   todos: todos.filter((todo) => {
-    //     return !todo.completed;
-    //   })
-    // });
-  }
+
 
   render() {
-    let todos=this.props.todos;
-    let countTodosLeft = 0;
-    // Count how many items are not completed
-    for(let i=0;i<todos.length;i++){
-      if (!todos[i].completed){
-        countTodosLeft++;
-      }
-    }
+   
 
     return (
       <section className="todoapp">
@@ -98,40 +82,19 @@ class App extends Component {
           {/* <Route exact path="/todos-part-4/" render={(props) => <TodoList {...props} todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} filterTab="all"/>} />
           <Route path="/todos-part-4/active" render={(props) => <TodoList {...props} todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} filterTab="active"/>} />
           <Route path="/todos-part-4/completed" render={(props) => <TodoList {...props} todos={this.state.todos} onToggle={this.toggleCompleted} onClick={this.removeTodo} filterTab="completed"/>} /> */}
-          <Route exact path="/todos-part-4/" render={(props) => <TodoList {...props} todos={this.props.todos} filterTab="all"/>} />
-          <Route path="/todos-part-4/active" render={(props) => <TodoList {...props} todos={this.props.todos} filterTab="active"/>} />
-          <Route path="/todos-part-4/completed" render={(props) => <TodoList {...props} todos={this.props.todos} filterTab="completed"/>} />
+          <Route exact path="/todos-part-4/" render={(props) => <TodoList {...props} filterTab="all"/>} />
+          <Route path="/todos-part-4/active" render={(props) => <TodoList {...props} filterTab="active"/>} />
+          <Route path="/todos-part-4/completed" render={(props) => <TodoList {...props} filterTab="completed"/>} />
           <Redirect to="/todos-part-4/" />
         </Switch>
-        <footer className="footer">
-          <span className="todo-count"><strong>{countTodosLeft}</strong> item(s) left</span>
-          <ul className="filters">
-            <li>
-              <Link to="/todos-part-4/">
-                All
-              </Link>
-            </li>
-            <li>
-              <Link to="/todos-part-4/active">
-                Active
-              </Link>
-            </li>
-            <li>
-              <Link to="/todos-part-4/completed">
-                Completed
-              </Link>
-            </li>
-          </ul>
-          
-          <button className="clear-completed" onClick={this.clearCompleted}>Clear completed</button>
-        </footer>
+        
 		</section>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {todos: state}
-}
+// const mapStateToProps = (state) => {
+//   return {todos: state}
+// }
 
-export default connect(mapStateToProps)(App)
+export default withRouter(connect()(App))

@@ -12,12 +12,12 @@ import reducer from './reducer'
 // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 //devToolsEnhancer()
 
-let store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
-    <Provider store={store}>
-        <BrowserRouter>
+    <BrowserRouter>
+        <Provider store={store}>
             <App />
-        </BrowserRouter>
-    </Provider>, document.getElementById('root'));
+        </Provider>
+    </BrowserRouter>, document.getElementById('root'));
 registerServiceWorker();

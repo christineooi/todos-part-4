@@ -19,30 +19,31 @@ class TodoItem extends Component {
     //   return (
     //     <li className={this.props.isCompleted ? "completed": null}>
     //       <div className="view">
-    //         <input className="toggle" type="checkbox" onChange={this.props.onToggle(this.props.todoId)} checked={this.props.isCompleted}/>
+    //         <input className="toggle" type="checkbox" onChange={this.toggleCompleted(this.props.todoId)} checked={this.props.isCompleted}/>
     //         <label>{this.props.text}</label>
-    //         <button className="destroy" onClick={this.props.onClick(this.props.todoId)}></button> 
+    //         <button className="destroy" onClick={this.removeTodo(this.props.todoId)}></button> 
     //       </div>
     //     </li>
     //   );
     // }
     render() {
+      console.log("In TodoItem - this.props.id: ", this.props.id)
       return (
-        <li className={this.props.todos.completed ? "completed": null}>
+        <li className={this.props.completed ? "completed": null}>
           <div className="view">
-            <input className="toggle" type="checkbox" onChange={this.toggleCompleted(this.props.todos.id)} checked={this.props.todos.completed}/>
-            <label>{this.props.todos.title}</label>
-            <button className="destroy" onClick={this.removeTodo(this.props.todos.id)}></button> 
+            <input className="toggle" type="checkbox" onChange={this.toggleCompleted(this.props.id)} checked={this.props.completed}/>
+            <label>{this.props.title}</label>
+            <button className="destroy" onClick={this.removeTodo(this.props.id)}></button> 
           </div>
         </li>
       );
     }
   }
 
-  const mapStateToProps = (state) => {
-    return {todos: state}
-  }
+  // const mapStateToProps = (state) => {
+  //   return {todos: state}
+  // }
   
 
 
-  export default connect(mapStateToProps)(TodoItem)
+  export default connect()(TodoItem)
