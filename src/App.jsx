@@ -28,7 +28,7 @@ class App extends Component {
 
         var value=this.state.text.trim();
         if(value){
-          this.props.dispatch(addTodo());
+          this.props.dispatch(addTodo(value));
           this.setState({
             text: ''
           });
